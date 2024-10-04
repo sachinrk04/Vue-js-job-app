@@ -1,25 +1,25 @@
 <script setup>
-import router from '@/router';
-import { reactive, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { useToast } from 'vue-toastification';
-import axios from 'axios';
+import router from "@/router";
+import { reactive, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { useToast } from "vue-toastification";
+import axios from "axios";
 
 const route = useRoute();
 
 const jobId = route.params.id;
 
 const form = reactive({
-  type: 'Full-Time',
-  title: '',
-  description: '',
-  salary: '',
-  location: '',
+  type: "Full-Time",
+  title: "",
+  description: "",
+  salary: "",
+  location: "",
   company: {
-    name: '',
-    description: '',
-    contactEmail: '',
-    contactPhone: '',
+    name: "",
+    description: "",
+    contactEmail: "",
+    contactPhone: "",
   },
 });
 
@@ -47,11 +47,11 @@ const handleSubmit = async () => {
 
   try {
     const response = await axios.put(`/api/jobs/${jobId}`, updatedJob);
-    toast.success('Job Updated Successfully');
+    toast.success("Job Updated Successfully");
     router.push(`/jobs/${response.data.id}`);
   } catch (error) {
-    console.error('Error fetching job', error);
-    toast.error('Job Was Not Added');
+    console.error("Error fetching job", error);
+    toast.error("Job Was Not Added");
   }
 };
 
@@ -70,7 +70,7 @@ onMounted(async () => {
     form.company.contactEmail = state.job.company.contactEmail;
     form.company.contactPhone = state.job.company.contactPhone;
   } catch (error) {
-    console.error('Error fetching job', error);
+    console.error("Error fetching job", error);
   } finally {
     state.isLoading = false;
   }
@@ -80,23 +80,13 @@ onMounted(async () => {
 <template>
   <section class="bg-green-50">
     <div class="container m-auto max-w-2xl py-24">
-      <div
-        class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
-      >
+      <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
         <form @submit.prevent="handleSubmit">
           <h2 class="text-3xl text-center font-semibold mb-6">Edit Job</h2>
 
           <div class="mb-4">
-            <label for="type" class="block text-gray-700 font-bold mb-2"
-              >Job Type</label
-            >
-            <select
-              v-model="form.type"
-              id="type"
-              name="type"
-              class="border rounded w-full py-2 px-3"
-              required
-            >
+            <label for="type" class="block text-gray-700 font-bold mb-2">Job Type</label>
+            <select v-model="form.type" id="type" name="type" class="border rounded w-full py-2 px-3" required>
               <option value="Full-Time">Full-Time</option>
               <option value="Part-Time">Part-Time</option>
               <option value="Remote">Remote</option>
@@ -105,9 +95,7 @@ onMounted(async () => {
           </div>
 
           <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2"
-              >Job Listing Name</label
-            >
+            <label class="block text-gray-700 font-bold mb-2">Job Listing Name</label>
             <input
               type="text"
               v-model="form.title"
@@ -119,9 +107,7 @@ onMounted(async () => {
             />
           </div>
           <div class="mb-4">
-            <label for="description" class="block text-gray-700 font-bold mb-2"
-              >Description</label
-            >
+            <label for="description" class="block text-gray-700 font-bold mb-2">Description</label>
             <textarea
               id="description"
               v-model="form.description"
@@ -133,16 +119,8 @@ onMounted(async () => {
           </div>
 
           <div class="mb-4">
-            <label for="type" class="block text-gray-700 font-bold mb-2"
-              >Salary</label
-            >
-            <select
-              id="salary"
-              v-model="form.salary"
-              name="salary"
-              class="border rounded w-full py-2 px-3"
-              required
-            >
+            <label for="type" class="block text-gray-700 font-bold mb-2">Salary</label>
+            <select id="salary" v-model="form.salary" name="salary" class="border rounded w-full py-2 px-3" required>
               <option value="Under $50K">under $50K</option>
               <option value="$50K - $60K">$50 - $60K</option>
               <option value="$60K - $70K">$60 - $70K</option>
@@ -173,9 +151,7 @@ onMounted(async () => {
           <h3 class="text-2xl mb-5">Company Info</h3>
 
           <div class="mb-4">
-            <label for="company" class="block text-gray-700 font-bold mb-2"
-              >Company Name</label
-            >
+            <label for="company" class="block text-gray-700 font-bold mb-2">Company Name</label>
             <input
               type="text"
               v-model="form.company.name"
@@ -187,11 +163,7 @@ onMounted(async () => {
           </div>
 
           <div class="mb-4">
-            <label
-              for="company_description"
-              class="block text-gray-700 font-bold mb-2"
-              >Company Description</label
-            >
+            <label for="company_description" class="block text-gray-700 font-bold mb-2">Company Description</label>
             <textarea
               id="company_description"
               v-model="form.company.description"
@@ -203,11 +175,7 @@ onMounted(async () => {
           </div>
 
           <div class="mb-4">
-            <label
-              for="contact_email"
-              class="block text-gray-700 font-bold mb-2"
-              >Contact Email</label
-            >
+            <label for="contact_email" class="block text-gray-700 font-bold mb-2">Contact Email</label>
             <input
               type="email"
               v-model="form.company.contactEmail"
@@ -219,11 +187,7 @@ onMounted(async () => {
             />
           </div>
           <div class="mb-4">
-            <label
-              for="contact_phone"
-              class="block text-gray-700 font-bold mb-2"
-              >Contact Phone</label
-            >
+            <label for="contact_phone" class="block text-gray-700 font-bold mb-2">Contact Phone</label>
             <input
               type="tel"
               v-model="form.company.contactPhone"

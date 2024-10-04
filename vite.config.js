@@ -21,4 +21,10 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  lintOnSave: {
+    rules: {
+      "vue/multi-word-component-names": "off",
+      "no-unused-vars": "off",
+    },
+  },
 });
